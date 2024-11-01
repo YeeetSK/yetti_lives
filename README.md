@@ -3,8 +3,8 @@ Ever wanted to make player's lifes more valuable? If yes, then this is your opti
 
 ## Links
 - [Cfx.re Forums](https://forum.cfx.re/t/free-yetti-rob-containers/5234293)
-- [Showcase](https://www.youtube.com/watch?v=1jyHGkU9WQE)
-- [Documentation](https://yetti-development.gitbook.io/yetti-development/free-scripts/yetti-rob-containers/showcase)
+- [Showcase](https://docs.yeeet.dev/free-scripts/yetti-life-s/showcase)
+- [Documentation](https://docs.yeeet.dev/free-scripts/yetti-life-s)
 
 ## Features
 - Amount of lifes can be configured
