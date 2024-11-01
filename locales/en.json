@@ -1,0 +1,18 @@
+{
+    "warning_title": "Remaining Life(s)",
+    "warning_text": "You have respawned, therefore another life was removed from you. \n\n You have %s life(s) remaining",
+    
+    "admin_check_title": "Remaining Life(s) of player",
+    "admin_check_description": "**Used**: %s life(s) \n\n **Remaining**: %s life(s)",
+
+    "character_deleted_message": "You ran out of lives",
+
+    "checklifes_help": "Check amount of lifes a player has spent / has left",
+    "checklifes_help_target": "Target player's server id",
+
+    "addlife_help": "Add a life to a player - remove amount of used lifes",
+    "addlife_help_target": "Target player's server id",
+    "addlife_help_lifesAmount": "The amount of lifes to give to the player",
+
+    "notify_lifechange": "You have succesfully updated the lifes for player ID: %s"
+}
