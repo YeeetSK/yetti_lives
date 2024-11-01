@@ -1,12 +1,15 @@
+local QBCore = exports['qb-core']:GetCoreObject()
 lib.locale()
 
 RegisterNetEvent('yettiLives:server:removeLife', function (playerId)
-    local source = playerId
-    local patient = exports.qbx_core:GetPlayer(source)
+    if source then
+        DropPlayer(source, 'Attempted Cheating - removing a life')
+    end
+    local src = playerId
+    local patient = QBCore.Functions.GetPlayer(src)
     local cid = patient.PlayerData.citizenid
     if cid then
-        MySQL.insert.await(
-        'INSERT INTO `player_lives` (citizenid, lives_spent) VALUES (?, ?) ON DUPLICATE KEY UPDATE citizenid = ?', {
+        MySQL.insert.await( 'INSERT INTO `player_lives` (citizenid, lives_spent) VALUES (?, ?) ON DUPLICATE KEY UPDATE citizenid = ?', {
             cid, 0, cid
         })
 
@@ -18,9 +21,11 @@ RegisterNetEvent('yettiLives:server:removeLife', function (playerId)
             data.lives_spent + 1, cid
         })
 
-        TriggerClientEvent('yettiLives:client:showWarning', source, Config.AmountOfLives - data.lives_spent)
+        TriggerClientEvent('yettiLives:client:showWarning', src, Config.AmountOfLives - data.lives_spent)
         if data.lives_spent >= Config.AmountOfLives then
-            exports.qbx_core:DeleteCharacter(cid, locale("character_deleted_message"))
+            DropPlayer(src, locale("character_deleted_message"))
+            Wait(2000) -- QBCore backs up player data when players leave, this should bypass that
+            MySQL.query('DELETE FROM players WHERE citizenid = ?', { cid })
         end
     end
 end)
@@ -37,7 +42,7 @@ lib.addCommand('checklifes', {
     restricted = Config.AdminPerms
 }, function(source, args, raw)
     local target = args.target
-    local targetPlayer = exports.qbx_core:GetPlayer(target)
+    local targetPlayer = QBCore.Functions.GetPlayer(target)
     local cid = targetPlayer.PlayerData.citizenid
 
     local spent
@@ -71,7 +76,7 @@ lib.addCommand('addlife', {
     restricted = Config.AdminPerms
 }, function(source, args, raw)
     local target = args.target
-    local targetPlayer = exports.qbx_core:GetPlayer(target)
+    local targetPlayer = QBCore.Functions.GetPlayer(target)
     local cid = targetPlayer.PlayerData.citizenid
 
     local spent
